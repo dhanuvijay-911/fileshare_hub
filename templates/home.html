@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Home | FileShare Hub{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-white rounded shadow-sm">
+    <h1 class="display-5">Welcome to FileShare Hub</h1>
+    <p class="lead">A secure and user-friendly platform to upload and manage files.</p>
+    <a href="{% url 'upload' %}" class="btn btn-primary btn-lg">Get Started</a>
+    <a href="{% url 'profile' %}" class="btn btn-secondary btn-lg">View Profile</a>
+</div>
+{% endblock %}

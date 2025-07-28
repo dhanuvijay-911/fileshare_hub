@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-sm rounded p-4">
+    <h2 class="mb-4 text-center text-primary fw-bold">
+      <i class="bi bi-folder2-open me-2"></i> Files uploaded by {{ viewing_user.username }}
+    </h2>
+
+    {% if files %}
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for file in files %}
+        <div class="col">
+          <div class="card shadow-sm text-center p-3 h-100">
+<h6 class="fw-semibold mb-2 p-2 rounded text-dark" style="background-color:#e0e0e0;">
+  <i class="bi bi-file-earmark-text me-1"></i>
+  {{ file.file.name|cut:"uploads/" }}
+</h6>
+
+
+            <p class="mb-1 text-muted small">
+              📅 Uploaded: {{ file.uploaded_at|date:"F d, Y @ h:i A" }}
+            </p>
+            {% if file.updated_at != file.uploaded_at %}
+            <p class="mb-3 text-muted small">
+              🔁 Reuploaded: {{ file.updated_at|date:"F d, Y @ h:i A" }}
+            </p>
+            {% else %}
+            <div class="mb-3"></div>
+            {% endif %}
+            <a href="{{ file.file.url }}" 
+   class="btn btn-outline-primary btn-sm px-3 py-1 mx-auto d-block" 
+   style="width: 60%;" 
+   download>
+   <i class="bi bi-download me-1"></i> Download
+</a>
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="alert alert-info text-center mt-3">
+        <i class="bi bi-info-circle me-2"></i>{{ viewing_user.username }} hasn’t uploaded any files yet.
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
